@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <Target Name="CodeScan" AfterTargets="BeforeBuild">
-    <Exec Command="dotnet run -p $(MSBuildThisFileDirectory)..\..\src\TestCli -- --project $(MSBuildThisFile)" ConsoleToMsBuild="false" />
+    <Exec Command="dotnet run -p $(MSBuildThisFileDirectory)..\..\src\DustyTables.Analyzer.Cli -- --project $(MSBuildThisFile) --output-mode msbuild" ConsoleToMsBuild="false" />
   </Target>
 
 
