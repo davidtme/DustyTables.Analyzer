@@ -4,7 +4,7 @@ open System
 open System.IO
 open FSharp.Compiler.SourceCodeServices
 open FSharp.Compiler.Text
-open Sql.FSharp.Analyzers.Core
+open DustyTables.Analyzer.Core
 
 let checker =
     FSharpChecker.Create(

@@ -1,10 +1,10 @@
 ﻿module SqlAnalysis
 
-open Sql.FSharp.Analyzers.Core
-open Microsoft.Data.SqlClient
-open System.Data
-open FSharp.Core
 open System
+open System.Data
+open Microsoft.Data.SqlClient
+open DustyTables.Analyzer.Core
+open FSharp.Core
 
 let createWarning (message: string) (range) : Message =
     { Message = message
@@ -171,19 +171,19 @@ let analyzeTempTableColumns parameterAttempts availableParameters = [
         for (name, typ, nullable) in availableParameters do
             match parameterAttempts |> List.tryFind(fun (attempt : UsedParameter) -> attempt.name = name) with
             | None ->
-                createWarning $"{name} cannot be found" range
+                createWarning $"{name} cannot be found on the table" range
 
             | Some (attempt : UsedParameter) ->
                 let pass = checkColTypeWithNullable attempt.paramFunc typ nullable
 
                 if not pass then 
-                    createWarning $"@{attempt.name} is the wrong parameter type" attempt.paramFuncRange
+                    createWarning $"{attempt.name} is the wrong type" attempt.paramFuncRange
                 
         for attempt in parameterAttempts do                
             if availableParameters |> List.exists(fun (n, _, _) -> attempt.name = n) then
                 ()
             else    
-                createWarning $"@{attempt.name} does not exists on the table" attempt.paramFuncRange
+                createWarning $"{attempt.name} is missing" attempt.paramFuncRange
     ]
 
 let analyzeOperation (operation: SqlOperation) (connectionString: string) =

@@ -29,7 +29,7 @@ let getUsers (connectionString : string) =
             |> Sql.tempTableData someData
             |> Sql.loadTempTable (fun row -> [
                 "HashCode", Sql.string row.Col1
-                "DateTest", Sql.dateTimeOrNone (Some System.DateTime.Now)
+                "DateTest_", Sql.dateTimeOrNone (Some System.DateTime.Now)
                 //"asd", Sql.string row.Col1
                 ])
             |> Sql.query "
@@ -38,7 +38,7 @@ let getUsers (connectionString : string) =
                   FROM #Temp
                   WHERE HashCode = @hashCode"
             |> Sql.parameters [
-                "@hashCode", Sql.string "Hello world" ]
+                "@hashCode_", Sql.string "Hello world" ]
             |> Sql.executeStream (fun reader ->
                 {
                     Id = 1

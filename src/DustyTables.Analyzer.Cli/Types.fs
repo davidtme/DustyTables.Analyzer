@@ -1,4 +1,4 @@
-﻿namespace Sql.FSharp.Analyzers.Core
+﻿namespace DustyTables.Analyzer.Core
 
 open FSharp.Compiler.Range
 

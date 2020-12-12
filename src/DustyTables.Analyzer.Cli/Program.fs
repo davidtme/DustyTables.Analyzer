@@ -5,7 +5,7 @@ open System.IO
 open FSharp.Compiler.SourceCodeServices
 open FSharp.Compiler.Text
 open System.Xml
-open Sql.FSharp.Analyzers.Core
+open DustyTables.Analyzer.Core
 open Microsoft.Data.SqlClient
 open System.Data
 
