@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="MSSQL_FSHARP" />
+    <Compile Include="Library.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DustyTables\DustyTables.fsproj" />
+  </ItemGroup>
+
+  <Target Name="CodeScan" AfterTargets="BeforeBuild">
+    <Exec Command="dotnet run -p $(MSBuildThisFileDirectory)..\..\src\TestCli -- --project $(MSBuildThisFile)" ConsoleToMsBuild="false" />
+  </Target>
+
+
+</Project>
